@@ -1,4 +1,4 @@
-name: Run KICS on remote repo
+name: Run OSV scanner on remote repo
 
 on:
   workflow_dispatch:
@@ -26,7 +26,7 @@ on:
         type: boolean
         default: true
 jobs:
-  run-kics:
+  run-osv:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout this repo
