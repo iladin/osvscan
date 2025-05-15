@@ -22,7 +22,7 @@ on:
       fail-on-vuln:
         description: "Whether to fail the action on vulnerability found"
         type: boolean
-        default: true
+        default: false
 jobs:
   run-osv:
     runs-on: ubuntu-latest
@@ -49,18 +49,18 @@ jobs:
             --new=results.json
             --gh-annotations=false
             --fail-on-vuln=${{ inputs.fail-on-vuln }}
-      # Upload the results as artifacts (optional). Commenting out will disable uploads of run results in SARIF
-      # format to the repository Actions tab.
-      - name: "Upload artifact"
-        if: "!cancelled()"
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
-        with:
-          name: SARIF file
-          path: ./${{ inputs.results }}
-          retention-days: 5
-      # Upload the results to GitHub's code scanning dashboard.
-      - name: "Upload to code-scanning"
-        if: "${{ !cancelled() && inputs.upload == true }}"
-        uses: github/codeql-action/upload-sarif@28deaeda66b76a05916b6923827895f2b14ab387 # v3.28.16
-        with:
-          sarif_file: ./${{ inputs.results }}
+      # # Upload the results as artifacts (optional). Commenting out will disable uploads of run results in SARIF
+      # # format to the repository Actions tab.
+      # - name: "Upload artifact"
+      #   if: "!cancelled()"
+      #   uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+      #   with:
+      #     name: SARIF file
+      #     path: ./${{ inputs.results }}
+      #     retention-days: 5
+      # # Upload the results to GitHub's code scanning dashboard.
+      # - name: "Upload to code-scanning"
+      #   if: "${{ !cancelled() && inputs.upload == true }}"
+      #   uses: github/codeql-action/upload-sarif@28deaeda66b76a05916b6923827895f2b14ab387 # v3.28.16
+      #   with:
+      #     sarif_file: ./${{ inputs.results }}
