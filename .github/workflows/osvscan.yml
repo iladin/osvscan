@@ -9,9 +9,7 @@ on:
       scanner-args:
         description: "scanner args"
         type: string
-        default: |-
-          -r
-          ./
+        default: -r ./
       results:
         description: "name of SARIF file"
         type: string
@@ -41,7 +39,7 @@ jobs:
       - name: "Run scanner"
         uses: google/osv-scanner/actions/scanner@main
         with:
-          scanner-args: |-
+          scan-args: |-
             --output=results.json
             --format=json
             ${{ inputs.scanner-args }}
