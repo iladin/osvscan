@@ -47,7 +47,7 @@ jobs:
       - name: "Run osv-scanner-reporter"
         uses: google/osv-scanner/actions/reporter@main
         with:
-          scanner-args: |-
+          scan-args: |-
             --output=${{ inputs.results }}
             --new=results.json
             --gh-annotations=false
